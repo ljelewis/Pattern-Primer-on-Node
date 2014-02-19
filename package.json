@@ -1,0 +1,32 @@
+{
+  "name": "pattern-primer",
+  "description": "Generating styled markup from a folder of markup snippets, using JavaScript on node.js",
+  "version": "0.0.1",
+  "author": {
+    "name": "Jonathan Mahoney",
+    "url": "https://github.com/codetwizzle/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codetwizzle/Pattern-Primer-on-Node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/codetwizzle/Pattern-Primer-on-Node/issues"
+  },
+  "main": "pattern-primer",
+  "bin": {
+    "pattern-primer": "pattern-primer.js"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "keywords": [
+    "pattern",
+    "primer",
+    "build"
+  ],
+  "readme": "https://github.com/codetwizzle/Pattern-Primer-on-Node/blob/master/README.md",
+  "dependencies": {
+    "connect": "^2.13.0"
+  }
+}

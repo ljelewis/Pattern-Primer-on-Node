@@ -6,22 +6,22 @@ Pattern-Primer-on-Node is a node.js port of Jeremy Keith's [Pattern Primer](http
 
 ###Installation
 
-You'll need node.js installed (obviously). In addition, you'll need connect:
+You'll need node.js installed (obviously).
 
-    npm install connect
-		
+    npm install -g connect pattern-primer
+
 ###Simple Usage
 
-Place all your HTML extracts into the `<root>/public/patterns` folder. Navigate to the root directory of Pattern-Primer-on-Node and run: 
-	
-    node pattern-primer.js
-	
-You can then navigate to http://localhost:8080/ to see the output.
+Place all your HTML extracts into the `<root>/public/patterns` folder. Navigate to the root directory of Pattern-Primer-on-Node and run:
+
+    pattern-primer
+
+You can then navigate to `http://localhost:8080/` to see the output.
 
 ###Headless Operation
 
 If you want to generate a 'standalone' version of the primer output, then you can also run the program with the `tofile` switch as follows:
 
-    node pattern-primer.js --tofile
-   
+    pattern-primer --tofile
+
 This will place a standalone html file, and a copy of the 'global.css' file located in `<root>/public` and will place them in `<root>/docs`. You should just be able to navigate to that folder and open the index.html file to see the same output.
