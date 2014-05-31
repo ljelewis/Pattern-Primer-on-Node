@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 /*jslint nomen: true */
 'use strict';
 
@@ -10,6 +12,7 @@ var settings = {
 	},
 	util = require('util'),
 	connect = require('connect'),
+
 	primer = function (serverResponse, tofile, tofileCallback) {
 		tofile = tofile || false;
 
@@ -21,7 +24,7 @@ var settings = {
 			outputPatterns = function (patterns) {
 				fs.readFile(settings.sourcehtmlfile, 'utf-8', function (err, content) {
 					if (err !== null) {
-						util.puts('There was an error when trying to read file:', 'output.html');
+						util.puts('There was an error when trying to read file:', 'source.html');
 						return;
 					}
 
@@ -112,9 +115,12 @@ if (process.argv[2] === '--tofile') {
 
 	primer(null, true, function (content) {
 		var fs = require('fs');
-		fs.writeFile('./' + settings.tofile_outputpath + '/index.html', content, 'utf-8', function () {
-			util.pump(fs.createReadStream('./' + settings.wwwroot + '/global.css'),
-				fs.createWriteStream('./' + settings.tofile_outputpath + '/global.css'));
+		fs.writeFile('./' + settings.tofile_outputpath + '/index.html', content, 'utf-8', function (err) {
+			if (err !== null && err.code === 'ENOENT') {
+				util.puts('Cannot find patterns folder:', settings.tofile_outputpath);
+				return;
+			}
+			fs.createReadStream('./' + settings.wwwroot + '/global.css').pipe(fs.createWriteStream('./' + settings.tofile_outputpath + '/global.css'));
 			util.puts('Stand-alone output can now be found in "' + settings.tofile_outputpath + '/"');
 		});
 	});
