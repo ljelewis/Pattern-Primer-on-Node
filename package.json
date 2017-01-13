@@ -28,5 +28,8 @@
   "readme": "https://github.com/codetwizzle/Pattern-Primer-on-Node/blob/master/README.md",
   "dependencies": {
     "connect": "^2.13.0"
+  },
+  "scripts": {
+    "start": "node pattern-primer"
   }
 }
