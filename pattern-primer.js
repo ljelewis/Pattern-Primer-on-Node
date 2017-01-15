@@ -33,16 +33,7 @@ var settings = {
 						file;
 
 					for (i = 0, l = patterns.length; i < l; i += 1) {
-						file = patterns[i];
-						content += '<div class="pattern"><div class="display">';
-						content += file.content;
-					    content += '</div><div class="source"><textarea rows="6" cols="30">';
-					    content += simpleEscaper(file.content);
-					    content += '</textarea>';
-						if (!tofile) {
-							content += '<p><a href="patterns/' + file.filename + '">' + file.filename + '</a></p>';
-						}
-						content += '</div></div>';
+						content += outputPattern(patterns[i]);
 					}
 
 					content += '</body></html>';
@@ -53,6 +44,20 @@ var settings = {
 						serverResponse.end(content);
 					}
 				});
+			},
+			outputPattern = function(patternFile) {
+				var content = '';
+				content += '<div class="pattern"><div class="display">';
+				content += patternFile.content;
+			    content += '</div><div class="source"><textarea rows="6" cols="30">';
+			    content += simpleEscaper(patternFile.content);
+			    content += '</textarea>';
+				if (!tofile) {
+					content += '<p><a href="patterns/' + patternFile.filename + '">' + patternFile.filename + '</a></p>';
+				}
+				content += '</div></div>';
+
+				return content;
 			},
 			handleFiles = function (files) {
 				var i,
