@@ -1,0 +1,18 @@
+html {
+	margin: 20px 10px;
+}
+.pattern {
+    clear: both;
+    overflow: hidden;
+}
+.pattern .display {
+    width: 65%;
+    float: left;
+}
+.pattern .source {
+    width: 30%;
+    float: right;
+}
+.pattern .source textarea {
+    width: 90%;
+}
