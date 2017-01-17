@@ -45,9 +45,23 @@ var settings = {
 					}
 				});
 			},
+			outputPatternHeadingText = function(patternFile) {
+				var name = patternFile.filename
+					.substring(0, patternFile.filename.indexOf('.'))
+					.split(/-|\./g)
+					.join(' ');
+
+
+				return name.substring(0, 1).toUpperCase() + name.substring(1);
+
+			},
+			outputPatternHeading = function(patternFile) {
+				return '<h3 class="pattern-heading">' + outputPatternHeadingText(patternFile) + '</h3>';
+			},
 			outputPattern = function(patternFile) {
 				var content = '';
 				content += '<div class="pattern"><div class="display">';
+				content += outputPatternHeading(patternFile);
 				content += patternFile.content;
 			    content += '</div><div class="source"><textarea rows="6" cols="30">';
 			    content += simpleEscaper(patternFile.content);

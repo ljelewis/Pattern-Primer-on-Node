@@ -1,6 +1,11 @@
 html {
 	margin: 20px 10px;
 }
+.pattern-heading {
+	font-size: 1.5em;
+	font-weight: bold;
+	margin-bottom: 10px;
+}
 .pattern {
     clear: both;
     overflow: hidden;
