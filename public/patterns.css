@@ -13,14 +13,7 @@ html {
     clear: both;
     overflow: hidden;
 }
-.pattern .display {
-    width: 65%;
-    float: left;
-}
-.pattern .source {
-    width: 30%;
-    float: right;
-}
 .pattern .source textarea {
-    width: 90%;
+    margin-top: 10px;
+    width: 95%;
 }
