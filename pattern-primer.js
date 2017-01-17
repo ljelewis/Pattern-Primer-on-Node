@@ -51,9 +51,7 @@ var settings = {
 					.split(/-|\./g)
 					.join(' ');
 
-
 				return name.substring(0, 1).toUpperCase() + name.substring(1);
-
 			},
 			outputPatternHeading = function(patternFile) {
 				return '<h3 class="pattern-heading">' + outputPatternHeadingText(patternFile) + '</h3>';
