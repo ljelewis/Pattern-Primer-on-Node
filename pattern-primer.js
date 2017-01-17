@@ -45,9 +45,21 @@ var settings = {
 					}
 				});
 			},
+			getPatternBlurbFileName = function(fileName) {
+				return fileName.substr(0, fileName.length - 5) + '.blurb.html';
+			},
+			outputPatternBlurb = function(patternFile) {
+				var blurbFileName = getPatternBlurbFileName(patternFile.filename);
+				if(!fs.existsSync(patternFolder + '/' + blurbFileName)) {
+					return '';
+				}
+
+				return '<div class="pattern-blurb">' +
+					fs.readFileSync(patternFolder + '/' + blurbFileName, 'utf-8') + '</div>';
+			},
 			outputPatternHeadingText = function(patternFile) {
 				var name = patternFile.filename
-					.substring(0, patternFile.filename.indexOf('.'))
+					.substring(0, patternFile.filename.length - 5)
 					.split(/-|\./g)
 					.join(' ');
 
@@ -60,6 +72,7 @@ var settings = {
 				var content = '';
 				content += '<div class="pattern"><div class="display">';
 				content += outputPatternHeading(patternFile);
+				content += outputPatternBlurb(patternFile);
 				content += patternFile.content;
 			    content += '</div><div class="source"><textarea rows="6" cols="30">';
 			    content += simpleEscaper(patternFile.content);
@@ -72,20 +85,13 @@ var settings = {
 				return content;
 			},
 			handleFiles = function (files) {
-				var i,
-					l,
-					file,
-					patterns = [];
-
 				// This was asyncronous, but we need the file names, which we can't get from the callback of 'readFile'
-				for (i = 0, l = files.length; i < l; i += 1) {
-					file = {
-						filename : files[i]
+				var patterns = files.map(function(file) {
+					return {
+						filename: file,
+						content: fs.readFileSync(patternFolder + '/' + file, 'utf-8')
 					};
-
-					file.content = fs.readFileSync(patternFolder + '/' + file.filename, 'utf-8');
-					patterns.push(file);
-				}
+				});
 
 				outputPatterns(patterns);
 			},
@@ -96,15 +102,9 @@ var settings = {
 						return;
 					}
 
-					var files = [],
-						i,
-						l;
-
-					for (i = 0, l = contents.length; i < l; i += 1) {
-						if (contents[i].substr(-5) === '.html') {
-							files.push(contents[i]);
-						}
-					}
+					var files = contents.filter(function(item) {
+						return item.substr(-5) === '.html' && item.substr(-10, 5) !== 'blurb';
+					});
 
 					handleFiles(files);
 				});
